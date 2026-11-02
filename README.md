@@ -4,23 +4,6 @@
 
 ---
 
-## Visual Identity & Design System
-
-Built on a restrained, data-focused enterprise analytics design system:
-
-- **Background (Deep Navy / Charcoal)**: `#0B1220`
-- **Main Surfaces**: `#111B2B`
-- **Secondary Surfaces**: `#172337`
-- **Primary Text**: `#E8EEF5`
-- **Secondary Text (Muted Slate)**: `#94A3B8`
-- **Accent (Muted Teal)**: `#2DD4BF`
-- **Secondary Accent (Electric Blue)**: `#3B82F6`
-- **Subtle Borders**: `#263449`
-- **Warning**: Muted Amber (`#F59E0B`)
-- **Error**: Restrained Red (`#EF4444`)
-
----
-
 ## Architecture & Workflows
 
 ### 1. Dedicated Homepage / Landing Page
