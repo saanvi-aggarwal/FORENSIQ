@@ -64,10 +64,7 @@ st.markdown(get_custom_css(), unsafe_allow_html=True)
 defaults = {
     "show_landing": True,
     "landing_show_uploader": False,
-    "nav_selected_page": "Dashboard",
-    "show_landing": True,
-    "landing_show_uploader": False,
-    "nav_selected_page": "Home",
+    "current_page": "Home",
     "analysis_df": None,
     "analysis_filename": None,
     "analysis_file_hash": None,
@@ -121,7 +118,7 @@ def load_demo_evidence(contamination):
         df = load_dataset(bio)
         process_loaded_dataframe(df, "fingerprint_evidence.csv", file_hash, contamination)
         st.session_state.show_landing = False
-        st.session_state.nav_selected_page = "Dashboard"
+        st.session_state.current_page = "Dashboard"
         st.rerun()
 
 
@@ -185,7 +182,7 @@ def render_landing_page(contamination):
         with btn_col2:
             if st.button("🔍 Explore Platform", use_container_width=True, key="landing_hero_explore_btn"):
                 st.session_state.show_landing = False
-                st.session_state.nav_selected_page = "Dashboard"
+                st.session_state.current_page = "Dashboard"
                 st.rerun()
 
     # Upload evidence widget on landing page when requested or always cleanly accessible
@@ -215,7 +212,7 @@ def render_landing_page(contamination):
                 l_df = load_dataset(landing_file)
                 process_loaded_dataframe(l_df, landing_file.name, l_hash, contamination)
                 st.session_state.show_landing = False
-                st.session_state.nav_selected_page = "Dashboard"
+                st.session_state.current_page = "Dashboard"
                 st.rerun()
             except Exception as e:
                 st.error(f"Upload failed: {e}")
@@ -359,7 +356,7 @@ st.sidebar.markdown("""
 
 # Navigation Menu
 nav_map = {
-    "Home":                   "Home (Landing Page)",
+    "Home":                   "Home",
     "Dashboard":              "Dashboard",
     "Case Management":        "Case Management",
     "Dataset Analysis":       "Dataset Analysis",
@@ -373,23 +370,28 @@ nav_map = {
 st.sidebar.markdown('<div style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;">Workspace Navigation</div>', unsafe_allow_html=True)
 
 nav_keys = list(nav_map.keys())
-current_nav_index = nav_keys.index(st.session_state.nav_selected_page) if st.session_state.nav_selected_page in nav_keys else (0 if st.session_state.show_landing else 1)
+
+# Sync radio key with session state before instantiation if changed programmatically
+if "_sidebar_nav_choice" not in st.session_state or st.session_state["_sidebar_nav_choice"] != st.session_state.current_page:
+    st.session_state["_sidebar_nav_choice"] = st.session_state.current_page
+
+def on_nav_change():
+    """Callback triggered when user selects a radio option."""
+    selected = st.session_state["_sidebar_nav_choice"]
+    st.session_state.current_page = selected
+    st.session_state.show_landing = (selected == "Home")
 
 page = st.sidebar.radio(
     "NAVIGATION",
     nav_keys,
-    index=current_nav_index,
+    key="_sidebar_nav_choice",
+    on_change=on_nav_change,
     format_func=lambda x: nav_map[x],
     label_visibility="collapsed"
 )
 
-# Update state if user clicks sidebar navigation
-if page == "Home":
-    st.session_state.show_landing = True
-    st.session_state.nav_selected_page = "Home"
-else:
-    st.session_state.show_landing = False
-    st.session_state.nav_selected_page = page
+# Ensure page variable reflects current active page
+page = st.session_state.current_page
 
 st.sidebar.markdown("---")
 
@@ -430,7 +432,7 @@ if uploaded_file is not None:
             df = load_dataset(uploaded_file)
             process_loaded_dataframe(df, uploaded_file.name, current_file_hash, contamination)
             st.session_state.show_landing = False
-            st.session_state.nav_selected_page = "Dashboard"
+            st.session_state.current_page = "Dashboard"
             st.rerun()
 
     except Exception as error:
