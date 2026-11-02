@@ -195,28 +195,6 @@ python -m streamlit run app.py
 http://localhost:8501
 ```
 
----
-
-## 🖥️ Application Screenshots
-
-Add screenshots of your actual application here.
-
-| Application Section  | Screenshot                              |
-| -------------------- | --------------------------------------- |
-| Landing Page         | `assets/screenshots/homepage.png`       |
-| Dataset Upload       | `assets/screenshots/upload.png`         |
-| Statistical Analysis | `assets/screenshots/statistics.png`     |
-| Anomaly Detection    | `assets/screenshots/anomalies.png`      |
-| Data Visualizations  | `assets/screenshots/visualizations.png` |
-| PDF Report           | `assets/screenshots/report.png`         |
-
-To display a screenshot directly:
-
-```markdown
-![FORENSIQ Dashboard](assets/screenshots/homepage.png)
-```
-
----
 
 ## 🌐 Live Application
 
