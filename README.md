@@ -61,47 +61,26 @@ The platform aims to make exploratory data analysis more accessible, understanda
 
 ---
 
+
 ## ⚙️ How FORENSIQ Works
-       ┌──────────────────────────┐
-       │   Upload Investigation   │
-       │         Dataset          │
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │      Data Loading        │
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │   Data Preprocessing     │
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │  Automated Data Profiling│
-       └────────────┬─────────────┘
-                    ↓
-          ┌─────────┴─────────┐
-          ↓                   ↓
-  ┌────────────────┐  ┌────────────────┐
-  │ Statistical    │  │ Data Quality   │
-  │ Analysis       │  │ Assessment     │
-  └────────┬───────┘  └────────┬───────┘
-           └─────────┬─────────┘
-                     ↓
-       ┌──────────────────────────┐
-       │    Anomaly Detection     │
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │ Interactive Visualizations│
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │    Analytical Insights   │
-       └────────────┬─────────────┘
-                    ↓
-       ┌──────────────────────────┐
-       │   PDF Report Generation  │
-       └──────────────────────────┘
+
+```mermaid
+flowchart TD
+    A[Upload Investigation Dataset] --> B[Data Loading]
+    B --> C[Data Preprocessing]
+    C --> D[Automated Data Profiling]
+
+    D --> E[Statistical Analysis]
+    D --> F[Data Quality Assessment]
+
+    E --> G[Anomaly Detection]
+    F --> G
+
+    G --> H[Interactive Visualizations]
+    H --> I[Analytical Insights]
+    I --> J[PDF Report Generation]
+```
+
 
 ### Workflow Explanation
 
