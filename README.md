@@ -1,24 +1,6 @@
 # 🔎 FORENSIQ — Investigation Intelligence Platform
 
-\<p align="center">
-&#x20; \<strong>Transforming Raw Data into Meaningful Investigative Insights\</strong>
-\</p>
-
-\<p align="center">
-&#x20; An automated Exploratory Data Analysis (EDA) platform designed to help investigators examine datasets, identify unusual patterns, detect anomalies, and generate structured analytical reports.
-\</p>
-
-\<p align="center">
-&#x20; ![Python]\([https://img.shields.io/badge/Python-3.11-blue?logo=python](https://img.shields.io/badge/Python-3.11-blue?logo=python))
-&#x20; ![Streamlit]\([https://img.shields.io/badge/Streamlit-Framework-red?logo=streamlit](https://img.shields.io/badge/Streamlit-Framework-red?logo=streamlit))
-&#x20; ![Pandas]\([https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas))
-&#x20; ![Plotly]\([https://img.shields.io/badge/Plotly-Visualization-3F4F75?logo=plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75?logo=plotly))
-&#x20; ![Status]\([https://img.shields.io/badge/Status-Active%20Development-success](https://img.shields.io/badge/Status-Active%20Development-success))
-\</p>
-
----
-
-## 📌 Overview
+📌 Overview
 
 **FORENSIQ** is a web-based investigation intelligence and data analysis platform that automates the process of exploring and examining structured datasets.
 
@@ -80,22 +62,46 @@ The platform aims to make exploratory data analysis more accessible, understanda
 ---
 
 ## ⚙️ How FORENSIQ Works
-
-The application follows a structured data analysis workflow:
-
-```mermaid
-flowchart TD
-    A["Upload Investigation Dataset"] --> B["Dataset Loading"]
-    B --> C["Data Preprocessing"]
-    C --> D["Automated Data Profiling"]
-    D --> E["Statistical Analysis"]
-    D --> F["Data Quality Assessment"]
-    E --> G["Anomaly Detection"]
-    F --> G
-    G --> H["Interactive Visualizations"]
-    H --> I["Analytical Insights"]
-    I --> J["PDF Report Generation"]
-```
+       ┌──────────────────────────┐
+       │   Upload Investigation   │
+       │         Dataset          │
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │      Data Loading        │
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │   Data Preprocessing     │
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │  Automated Data Profiling│
+       └────────────┬─────────────┘
+                    ↓
+          ┌─────────┴─────────┐
+          ↓                   ↓
+  ┌────────────────┐  ┌────────────────┐
+  │ Statistical    │  │ Data Quality   │
+  │ Analysis       │  │ Assessment     │
+  └────────┬───────┘  └────────┬───────┘
+           └─────────┬─────────┘
+                     ↓
+       ┌──────────────────────────┐
+       │    Anomaly Detection     │
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │ Interactive Visualizations│
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │    Analytical Insights   │
+       └────────────┬─────────────┘
+                    ↓
+       ┌──────────────────────────┐
+       │   PDF Report Generation  │
+       └──────────────────────────┘
 
 ### Workflow Explanation
 
