@@ -42,6 +42,7 @@ def get_custom_css():
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-primary);
+    scroll-behavior: smooth;
 }
 
 .stApp {

@@ -1,5 +1,6 @@
 
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import plotly.express as px
 import hashlib
@@ -64,6 +65,7 @@ st.markdown(get_custom_css(), unsafe_allow_html=True)
 defaults = {
     "show_landing": True,
     "landing_show_uploader": False,
+    "scroll_to_upload": False,
     "current_page": "Home",
     "analysis_df": None,
     "analysis_filename": None,
@@ -154,6 +156,7 @@ def render_landing_page(contamination):
             <a href="#about" style="color: #64748B; font-weight: 500; text-decoration: none; font-size: 0.88rem;">About</a>
             <a href="#capabilities" style="color: #64748B; font-weight: 500; text-decoration: none; font-size: 0.88rem;">Capabilities</a>
             <a href="#how-it-works" style="color: #64748B; font-weight: 500; text-decoration: none; font-size: 0.88rem;">How It Works</a>
+            <a href="#upload-section" style="color: #0F766E; font-weight: 600; text-decoration: none; font-size: 0.88rem;">Upload</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -173,12 +176,14 @@ def render_landing_page(contamination):
     """, unsafe_allow_html=True)
 
     # Hero CTAs
+    st.markdown('<div id="upload-section" style="scroll-margin-top: 24px;"></div>', unsafe_allow_html=True)
     hero_c1, hero_c2, hero_c3 = st.columns([1, 2, 1])
     with hero_c2:
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             if st.button("📤 Upload Evidence", use_container_width=True, key="landing_hero_upload_btn"):
                 st.session_state.landing_show_uploader = True
+                st.session_state.scroll_to_upload = True
         with btn_col2:
             if st.button("🔍 Explore Platform", use_container_width=True, key="landing_hero_explore_btn"):
                 st.session_state.show_landing = False
@@ -218,6 +223,40 @@ def render_landing_page(contamination):
                 st.error(f"Upload failed: {e}")
 
         st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.session_state.get("scroll_to_upload", False):
+        components.html(
+            """
+            <script>
+            function scrollToUpload() {
+                try {
+                    const doc = window.parent.document;
+                    const target = doc.getElementById('upload-section');
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        const mainContainer = doc.querySelector('.main, section.main, [data-testid="stMain"]');
+                        if (mainContainer && mainContainer.scrollTop === 0) {
+                            const rect = target.getBoundingClientRect();
+                            const containerRect = mainContainer.getBoundingClientRect();
+                            mainContainer.scrollTo({
+                                top: mainContainer.scrollTop + (rect.top - containerRect.top) - 20,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                } catch (e) {
+                    console.error("Scroll error:", e);
+                }
+            }
+            setTimeout(scrollToUpload, 80);
+            setTimeout(scrollToUpload, 250);
+            setTimeout(scrollToUpload, 500);
+            </script>
+            """,
+            height=0,
+            width=0
+        )
+        st.session_state.scroll_to_upload = False
 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
