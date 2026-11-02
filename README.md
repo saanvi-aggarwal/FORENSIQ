@@ -138,8 +138,6 @@ FORENSIQ/
 └── README.md
 ```
 
-*Note: This is a suggested documentation structure. Adjust filenames and folders to match the actual repository.*
-
 ---
 
 ## 🚀 Getting Started
